@@ -5,7 +5,11 @@ import com.offline.city.map.serenity.tasks.Launch;
 import com.offline.city.map.serenity.tasks.Search;
 
 import cucumber.api.Scenario;
+import io.appium.java_client.MobileDriver;
 import net.serenitybdd.core.Serenity;
+import net.serenitybdd.core.webdriver.RemoteDriver;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
@@ -13,6 +17,13 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import net.thucydides.core.util.EnvironmentVariables;
+import net.thucydides.core.webdriver.ThucydidesWebDriverSupport;
+import net.thucydides.core.webdriver.WebDriverFacade;
+import net.thucydides.core.webdriver.WebdriverManager;
+import org.openqa.selenium.WebDriver;
+
+import java.rmi.Remote;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.is;
@@ -29,7 +40,6 @@ public class SearchRouteSteps {
         OnStage.setTheStage(new OnlineCast());
         this.scenario = scenario;
         Serenity.setSessionVariable("ScenarioName").to(scenario.getName());
-
     }
 
     @After
