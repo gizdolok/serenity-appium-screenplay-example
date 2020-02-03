@@ -22,8 +22,11 @@ public class BrowserStackSerenityDriver implements DriverSource {
 
     String actorName;
     String scenarioName;
-    AppiumDriver driver;
-    String appName;
+
+    public BrowserStackSerenityDriver() {
+        this.actorName = Serenity.sessionVariableCalled("commuterName");
+        this.scenarioName = Serenity.sessionVariableCalled("ScenarioName");
+    }
 
     public AppiumDriver newDriver() {
         EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
@@ -80,8 +83,8 @@ public class BrowserStackSerenityDriver implements DriverSource {
                 return new AppiumDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities) {};
             } else {
 
-                actorName = Serenity.sessionVariableCalled("commuterName");
-                scenarioName = Serenity.sessionVariableCalled("ScenarioName");
+/*                actorName = Serenity.sessionVariableCalled("commuterName");
+                scenarioName = Serenity.sessionVariableCalled("ScenarioName");*/
 
                 //capabilities.setCapability("name", scenarioName);
                 capabilities.setCapability("realMobile", true);
@@ -123,11 +126,11 @@ public class BrowserStackSerenityDriver implements DriverSource {
                             break;
 
                         case "Michael":
-                            driver = (AppiumDriver) ((WebDriverFacade) getDriver()).getProxiedDriver();
+                            //driver = (AppiumDriver) ((WebDriverFacade) getDriver()).getProxiedDriver();
                             Serenity.recordReportData().withTitle("Michael still doesn't have thePrivacyPolicy offline city map app").andContents("This test failed because MI is not implemented for Android");
-                            driver.closeApp();
-                            driver.close();
-                            driver.quit();
+                            //driver.closeApp();
+                            //driver.close();
+                            //driver.quit();
                             break;
 
                         default:
@@ -163,11 +166,10 @@ public class BrowserStackSerenityDriver implements DriverSource {
                             break;
 
                         case "Michael":
-                            driver = (AppiumDriver) ((WebDriverFacade) getDriver()).getProxiedDriver();
                             Serenity.recordReportData().withTitle("Michael still doesn't have thePrivacyPolicy offline city map app").andContents("This test failed because MI is not implemented for Android");
-                            driver.closeApp();
-                            driver.close();
-                            driver.quit();
+                            //driver.closeApp();
+                            //driver.close();
+                            //driver.quit();
                             break;
 
                         default:
