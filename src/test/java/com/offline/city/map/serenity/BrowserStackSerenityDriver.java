@@ -126,11 +126,7 @@ public class BrowserStackSerenityDriver implements DriverSource {
                             break;
 
                         case "Michael":
-                            //driver = (AppiumDriver) ((WebDriverFacade) getDriver()).getProxiedDriver();
                             Serenity.recordReportData().withTitle("Michael still doesn't have thePrivacyPolicy offline city map app").andContents("This test failed because MI is not implemented for Android");
-                            //driver.closeApp();
-                            //driver.close();
-                            //driver.quit();
                             break;
 
                         default:
