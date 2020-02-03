@@ -17,13 +17,19 @@ Feature: Search Locations
 
       | visitor   | device  |  poi                 |
       |  Berner   | android | Berliner Fernsehturm |
+      |  Berner   | android | Berliner Fernsehturm |
 
     Examples: Points Of Interest in London App
 
       | visitor   | device  |  poi                 |
+      | Lodovico  | android | Covent Garden        |
       | Lodovico  | android | Covent Garden        |
 
     Examples: Points Of Interest in Lisbon App
 
       | visitor   | device  |  poi                 |
       |  Lisbet   | android | Castelo de São Jorge |
+      |  Lisbet   | android | Castelo de São Jorge |
+
+
+
