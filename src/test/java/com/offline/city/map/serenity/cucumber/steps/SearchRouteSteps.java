@@ -1,11 +1,13 @@
 package com.offline.city.map.serenity.cucumber.steps;
 
+import com.offline.city.map.serenity.abilities.UseAMobileDevice;
 import com.offline.city.map.serenity.tasks.Go;
 import com.offline.city.map.serenity.tasks.Launch;
 import com.offline.city.map.serenity.tasks.Search;
 
 import cucumber.api.Scenario;
 import net.serenitybdd.core.Serenity;
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
@@ -38,7 +40,9 @@ public class SearchRouteSteps {
 
         Serenity.setSessionVariable("deviceType").to(deviceType);
 
-        OnStage.theActorCalled(commuterName).attemptsTo(
+        OnStage.theActorCalled(commuterName)
+                                            //.whoCan(UseAMobileDevice.as(Actor.named(commuterName)))
+                                            .attemptsTo(
                                                             Launch.theApp(),
                                                             Go.toMap()
                                                         );
