@@ -17,7 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UseAMobileDevice extends PageObject implements Ability, RefersToActor {
+public class UseTheApp extends PageObject implements Ability, RefersToActor {
 
     private final WebdriverManager webdriverManager;
 
@@ -25,7 +25,7 @@ public class UseAMobileDevice extends PageObject implements Ability, RefersToAct
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public UseAMobileDevice(WebDriver webDriver) {
+    public UseTheApp(WebDriver webDriver) {
         super(webDriver);
         this.webdriverManager = ThucydidesWebDriverSupport.getWebdriverManager();
         registerForEventNotification();
@@ -35,14 +35,14 @@ public class UseAMobileDevice extends PageObject implements Ability, RefersToAct
         Broadcaster.getEventBus().register(this);
     }
 
-    public static UseAMobileDevice as(Actor actor){
-        if(actor.abilityTo(UseAMobileDevice.class) == null){
+    public static UseTheApp as(Actor actor){
+        if(actor.abilityTo(UseTheApp.class) == null){
             throw new ActorCannotBrowseTheWebException(actor.getName());
         }
-        return actor.abilityTo(UseAMobileDevice.class).asActor(actor);
+        return actor.abilityTo(UseTheApp.class).asActor(actor);
     }
 
-    public static UseAMobileDevice with(WebDriver webDriver){return new UseAMobileDevice(webDriver);}
+    public static UseTheApp with(WebDriver webDriver){return new UseTheApp(webDriver);}
 
     public <T extends PageObject> T onPage(Class<T> pageObjectClass) {
         return on(pageObjectClass);

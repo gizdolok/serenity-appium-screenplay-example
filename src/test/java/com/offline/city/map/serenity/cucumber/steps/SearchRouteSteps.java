@@ -1,7 +1,7 @@
 package com.offline.city.map.serenity.cucumber.steps;
 
 import com.offline.city.map.serenity.BrowserStackSerenityDriver;
-import com.offline.city.map.serenity.abilities.UseAMobileDevice;
+import com.offline.city.map.serenity.abilities.UseTheApp;
 import com.offline.city.map.serenity.tasks.Go;
 import com.offline.city.map.serenity.tasks.Launch;
 import com.offline.city.map.serenity.tasks.Search;
@@ -9,7 +9,6 @@ import com.offline.city.map.serenity.tasks.Search;
 import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.webdriver.driverproviders.AppiumDriverProvider;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
@@ -17,8 +16,6 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import net.thucydides.core.webdriver.ProvidedDriver;
-import org.openqa.selenium.WebDriver;
 
 
 public class SearchRouteSteps {
@@ -28,9 +25,11 @@ public class SearchRouteSteps {
 
     @Before
     public void set_the_stage(Scenario scenario) {
+
         OnStage.setTheStage(new OnlineCast());
         this.scenario = scenario;
         Serenity.setSessionVariable("ScenarioName").to(scenario.getName());
+
         hisMobile = new BrowserStackSerenityDriver().newDriver();
     }
 
@@ -47,7 +46,7 @@ public class SearchRouteSteps {
         Serenity.setSessionVariable("deviceType").to(deviceType);
 
         OnStage.theActorCalled(commuterName)
-                                            .whoCan(UseAMobileDevice.with(hisMobile))
+                                            .whoCan(UseTheApp.with(hisMobile))
                                             .attemptsTo(
                                                             Launch.theApp(),
                                                             Go.toMap()
