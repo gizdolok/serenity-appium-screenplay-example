@@ -14,7 +14,6 @@ import net.thucydides.core.webdriver.SerenityWebdriverManager;
 import net.thucydides.core.webdriver.ThucydidesWebDriverSupport;
 import net.thucydides.core.webdriver.WebdriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +25,8 @@ public class UseAMobileDevice extends PageObject implements Ability, RefersToAct
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public UseAMobileDevice(WebDriver remoteWebDriver) {
-        super(remoteWebDriver);
+    public UseAMobileDevice(WebDriver webDriver) {
+        super(webDriver);
         this.webdriverManager = ThucydidesWebDriverSupport.getWebdriverManager();
         registerForEventNotification();
     }
@@ -43,7 +42,7 @@ public class UseAMobileDevice extends PageObject implements Ability, RefersToAct
         return actor.abilityTo(UseAMobileDevice.class).asActor(actor);
     }
 
-    public static UseAMobileDevice with(WebDriver remoteWebDriver){return new UseAMobileDevice(remoteWebDriver);}
+    public static UseAMobileDevice with(WebDriver webDriver){return new UseAMobileDevice(webDriver);}
 
     public <T extends PageObject> T onPage(Class<T> pageObjectClass) {
         return on(pageObjectClass);
@@ -67,7 +66,7 @@ public class UseAMobileDevice extends PageObject implements Ability, RefersToAct
 
     @Subscribe public void prepareQuestion(ActorAsksQuestion questionEvent) {
         if (messageIsForThisActor(questionEvent)) {
-            WebDriver driver = (RemoteWebDriver) webdriverManager.getWebdriver();
+            WebDriver driver = webdriverManager.getWebdriver();
             PageObjectDependencyInjector injector = new PageObjectDependencyInjector(new Pages(driver));
             injector.injectDependenciesInto(questionEvent.getQuestion());
         }
