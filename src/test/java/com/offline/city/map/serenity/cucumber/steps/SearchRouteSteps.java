@@ -41,7 +41,7 @@ public class SearchRouteSteps {
         Serenity.setSessionVariable("deviceType").to(deviceType);
 
         OnStage.theActorCalled(commuterName)
-                                            //.whoCan(UseAMobileDevice.as(Actor.named(commuterName)))
+                                            .whoCan(UseAMobileDevice.as(Actor.named(commuterName)))
                                             .attemptsTo(
                                                             Launch.theApp(),
                                                             Go.toMap()
