@@ -7,6 +7,7 @@ import com.offline.city.map.serenity.tasks.Search;
 
 import cucumber.api.Scenario;
 import net.serenitybdd.core.Serenity;
+import net.serenitybdd.core.webdriver.RemoteDriver;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
@@ -15,11 +16,13 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.openqa.selenium.WebDriver;
 
 
 public class SearchRouteSteps {
 
     Scenario scenario;
+    RemoteDriver hisMobile;
 
     @Before
     public void set_the_stage(Scenario scenario) {
@@ -41,7 +44,7 @@ public class SearchRouteSteps {
         Serenity.setSessionVariable("deviceType").to(deviceType);
 
         OnStage.theActorCalled(commuterName)
-                                            .whoCan(UseAMobileDevice.as(Actor.named(commuterName)))
+                                            .whoCan(UseAMobileDevice.with((WebDriver) hisMobile))
                                             .attemptsTo(
                                                             Launch.theApp(),
                                                             Go.toMap()
