@@ -1,13 +1,12 @@
 package com.offline.city.map.serenity;
 
 
-import net.serenitybdd.core.Serenity;
+import com.offline.city.map.serenity.utils.SetCapabilities;
 
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import net.thucydides.core.webdriver.DriverSource;
 
-import net.thucydides.core.webdriver.WebDriverFacade;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
@@ -15,17 +14,14 @@ import java.util.Iterator;
 
 import io.appium.java_client.AppiumDriver;
 
-import static com.offline.city.map.serenity.utils.Utils.*;
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
-
 public class BrowserStackSerenityDriver implements DriverSource {
 
-    String actorName;
-    String scenarioName;
+    URL browserStackURL;
+    AppiumDriver appiumDriverToReturn;
+
 
     public BrowserStackSerenityDriver() {
-        this.actorName = Serenity.sessionVariableCalled("commuterName");
-        this.scenarioName = Serenity.sessionVariableCalled("ScenarioName");
+        super();
     }
 
     public AppiumDriver newDriver() {
@@ -79,101 +75,20 @@ public class BrowserStackSerenityDriver implements DriverSource {
         //RemoteWebDriver
         try {
 
-            if(environment!=null && environment.contains("-local")){
+            if(environment!=null && environment.equalsIgnoreCase("local")){
+
+                SetCapabilities.localCapabilities(capabilities);
+
+                //return the localhost URL to start test on your local Appium Server
                 return new AppiumDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities) {};
             } else {
 
-/*                actorName = Serenity.sessionVariableCalled("commuterName");
-                scenarioName = Serenity.sessionVariableCalled("ScenarioName");*/
 
-                //capabilities.setCapability("name", scenarioName);
-                capabilities.setCapability("realMobile", true);
+                SetCapabilities.forBrowserStack(capabilities);
 
-                capabilities.setCapability("autoGrantPermissions", true);
-                capabilities.setCapability("autoAcceptAlerts", true);
-                capabilities.setCapability("autoDissmissAlerts", true);
-                capabilities.setCapability("unicodeKeyboard", true);
+                SetCapabilities.toStartDeviceForCurrentActor(capabilities);
 
-                capabilities.setCapability("project","City Map");
-
-                if(isAndroidPlatform()){
-
-                    capabilities.setCapability("platformName", "ANDROID");
-                    capabilities.setCapability("platform", "android");
-                    capabilities.setCapability("os", "android");
-                    capabilities.setCapability("os_version", "9.0");
-                    capabilities.setCapability("device", "Samsung Galaxy S10");
-                    capabilities.setCapability("automationName", "Appium");    // uiautomator2 does not work on PayPal pages
-
-                    //Broswserstack Caps:
-                    capabilities.setCapability("build", "City Map Android");
-
-                    switch (actorName){
-
-                        case "Berner":
-                            capabilities.setCapability("app", environmentVariables.getProperty("browserstack.appBerlin"));
-                            capabilities.setCapability("name", scenarioName + " on Berlin App");
-                            break;
-
-                        case "Lodovico":
-                            capabilities.setCapability("app",environmentVariables.getProperty("browserstack.appLondon"));
-                            capabilities.setCapability("name", scenarioName + " on London App");
-                            break;
-
-                        case "Lisbet":
-                            capabilities.setCapability("app",environmentVariables.getProperty("browserstack.appLisbon"));
-                            capabilities.setCapability("name", scenarioName + " on Lisbon App");
-                            break;
-
-                        case "Michael":
-                            Serenity.recordReportData().withTitle("Michael still doesn't have thePrivacyPolicy offline city map app").andContents("This test failed because MI is not implemented for Android");
-                            break;
-
-                        default:
-                            System.out.println("No App found for actor " + actorName);
-                            break;
-                    }
-
-                } else if(isIosPlatform()){
-
-                    capabilities.setCapability("platformName", "IOS");
-                    capabilities.setCapability("platform", "ios");
-                    capabilities.setCapability("os", "ios");
-                    capabilities.setCapability("os_version", "11");
-                    capabilities.setCapability("device", "iPhone 6");
-                    capabilities.setCapability("connectHardwareKeyboard", true);
-                    capabilities.setCapability("sendKeyStrategy", "oneByOne");
-
-                    switch (actorName){
-
-                        case "Berner":
-                            capabilities.setCapability("app","patrick785/berlin-offline-city-map-ios");
-                            capabilities.setCapability("build", "City Map iOS");
-                            break;
-
-                        case "Lodovico":
-                            capabilities.setCapability("app","patrick785/london-offline-city-map-ios");
-                            capabilities.setCapability("build", "Berlin iOS App");
-                            break;
-
-                        case "Lisbet":
-                            capabilities.setCapability("app","patrick785/lisbon-offline-city-map-ios");
-                            capabilities.setCapability("build", "Berlin iOS App");
-                            break;
-
-                        case "Michael":
-                            Serenity.recordReportData().withTitle("Michael still doesn't have thePrivacyPolicy offline city map app").andContents("This test failed because MI is not implemented for Android");
-                            //driver.closeApp();
-                            //driver.close();
-                            //driver.quit();
-                            break;
-
-                        default:
-                            System.out.println("No App found for actor " + actorName);
-                            break;
-                    }
-                }
-
+                //return the browserstack URL to start test on browserstack Servers
                 return new AppiumDriver(new URL("https://" + username + ":" + accessKey + "@"
                         + environmentVariables.getProperty("browserstack.server") + "/wd/hub"), capabilities) {};
             }

@@ -1,6 +1,8 @@
 package com.offline.city.map.serenity.utils;
 
 import net.serenitybdd.core.Serenity;
+import net.serenitybdd.core.SerenitySystemProperties;
+import net.thucydides.core.ThucydidesSystemProperty;
 import net.thucydides.core.webdriver.WebDriverFacade;
 
 import org.openqa.selenium.WebElement;
@@ -18,17 +20,8 @@ import static java.time.Duration.ofMillis;
 
 public class Utils {
 
-    //static String deviceName;
-    static private String deviceType;// = Serenity.sessionVariableCalled("deviceType");
+    static private String deviceType = SerenitySystemProperties.getProperties().getValue(ThucydidesSystemProperty.CONTEXT);
 
-    public static String getPlatform() {
-
-        deviceType = Serenity.sessionVariableCalled("deviceType");
-        //String.valueOf(driver.getCapabilities().getCapability("platformName"));
-        if (deviceType.equalsIgnoreCase("iphone"))
-                return "ios";
-        else return "android";
-    }
     public static boolean isIosPlatform() {
         deviceType = Serenity.sessionVariableCalled("deviceType");
         return deviceType.equalsIgnoreCase("iphone");
@@ -36,16 +29,6 @@ public class Utils {
     public static boolean isAndroidPlatform() {
         deviceType = Serenity.sessionVariableCalled("deviceType");
         return deviceType.equalsIgnoreCase("android");
-    }
-
-    public static boolean isBrowserstackIos() {
-
-        return deviceType.contains("iPhone");
-    }
-
-    public static boolean isBrowserstackAndroid() {
-
-        return deviceType.contains("android");
     }
 
     public static Map<String, List<String>> convertListOfListsToMapOfLists(List<List<String>> listOflist){

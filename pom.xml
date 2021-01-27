@@ -26,14 +26,16 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <serenity.version>2.1.4</serenity.version>
-        <serenity.cucumber.version>1.9.51</serenity.cucumber.version>
-        <browserstack.local.version>1.0.3</browserstack.local.version>
+        <serenity.version>2.3.10</serenity.version>
+        <serenity.cucumber.version>2.3.10</serenity.cucumber.version>
+        <browserstack.local.version>1.0.6</browserstack.local.version>
+        <serenity-browserstack.version>2.0.90</serenity-browserstack.version>
+        <appium-java-client.version>7.3.0</appium-java-client.version><!--7.4.1-->
 
         <maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
         <maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
-        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
-        <maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
+        <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
+        <maven.compiler-plugin.version>3.8.0</maven.compiler-plugin.version>
 
     </properties>
 
@@ -82,7 +84,7 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>7.3.0</version>
+            <version>${appium-java-client.version}</version>
         </dependency>
 
          <dependency>
@@ -99,7 +101,7 @@
 
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-cucumber</artifactId>
+            <artifactId>serenity-cucumber6</artifactId>
             <version>${serenity.cucumber.version}</version>
         </dependency>
 
@@ -126,7 +128,7 @@
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-browserstack</artifactId>
-            <version>2.0.90</version>
+            <version>${serenity-browserstack.version}</version>
         </dependency>
 
         <dependency>
