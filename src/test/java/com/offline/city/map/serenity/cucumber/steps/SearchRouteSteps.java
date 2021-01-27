@@ -1,15 +1,11 @@
 package com.offline.city.map.serenity.cucumber.steps;
 
-import com.offline.city.map.serenity.BrowserStackSerenityDriver;
-import com.offline.city.map.serenity.abilities.UseTheApp;
 import com.offline.city.map.serenity.tasks.Go;
 import com.offline.city.map.serenity.tasks.Launch;
 import com.offline.city.map.serenity.tasks.Search;
 
 import io.cucumber.java.Scenario;
-import io.appium.java_client.AppiumDriver;
 import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
@@ -17,16 +13,11 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 
 
 public class SearchRouteSteps {
 
     Scenario scenario;
-    AppiumDriver hisMobile;
-    EnvironmentVariables environmentVariables;
-
 
     @Before
     public void set_the_stage(Scenario scenario) {
@@ -34,8 +25,6 @@ public class SearchRouteSteps {
         OnStage.setTheStage(new OnlineCast());
         this.scenario = scenario;
         Serenity.setSessionVariable("ScenarioName").to(scenario.getName());
-        environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-        hisMobile = new BrowserStackSerenityDriver().newDriver();
     }
 
     @After
@@ -49,9 +38,7 @@ public class SearchRouteSteps {
         Serenity.setSessionVariable("commuterName").to(commuterName);
 
         Serenity.setSessionVariable("deviceType").to(deviceType);
-        environmentVariables.setProperty("","");
         OnStage.theActorCalled(commuterName)
-                                            .whoCan(UseTheApp.with(hisMobile))
                                             .attemptsTo(
                                                             Launch.theApp(),
                                                             Go.toMap()
