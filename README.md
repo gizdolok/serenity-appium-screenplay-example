@@ -57,7 +57,7 @@ Git:
     Get the value of the shareable_id that results from this request and assign it to the browserstack.appLisbon variable on the serenity.properties file
 
 
-## Use Maven ro Execute test
+## Use Maven to Execute test
 
 
 To verify project's integrity:
