@@ -13,14 +13,14 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 public class Accept implements Task {
 
     @Override
-    @Step("{0} wants toMap accept the Privacy Policy")
+    @Step("{0} wants to accept the Privacy Policy")
     public <T extends Actor> void performAs(T actor) {
 
         actor.attemptsTo(TapOn.the(PrivacyPolicyDialog.ACCEPT_BUTTON));
 
     }
 
-    public static Performable thePrivacyPolicy() {
+    public static Performable thePrivacyPolicyDialog() {
         return instrumented(Accept.class);
     }
 }

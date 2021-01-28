@@ -72,7 +72,7 @@ public class BrowserStackSerenityDriver implements DriverSource {
                 }
             }
         }
-        //RemoteWebDriver
+
         try {
 
             if(environment!=null && environment.equalsIgnoreCase("local")){

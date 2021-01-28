@@ -38,8 +38,12 @@ public class SetCapabilities {
         capabilities.setCapability("autoDissmissAlerts", true);
         capabilities.setCapability("unicodeKeyboard", true);
 
-        //Browserstack Dashboard Cap:
+        //Browserstack Dashboard Caps:
+        //Serenity session variable from the method set_the_stage(Scenario scenario)
+        scenarioName = Serenity.sessionVariableCalled("ScenarioName");
+
         capabilities.setCapability("project","City Map");
+        capabilities.setCapability("name", scenarioName);
 
 /*
 
@@ -81,17 +85,15 @@ public class SetCapabilities {
 
     public static void toStartDeviceForCurrentActor(DesiredCapabilities capabilities) {
         actorName = Serenity.sessionVariableCalled("commuterName");
-        scenarioName = Serenity.sessionVariableCalled("ScenarioName");
         appName = Serenity.sessionVariableCalled("appName");
         environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
 
-        capabilities.setCapability("name", scenarioName);
         capabilities.setCapability("networkConnectionEnabled", "true");
 
-        //Browserstack Dashboard Cap:
-        capabilities.setCapability("build", "City Map Android");
-
         if(isAndroidPlatform()){
+
+            //Browserstack Dashboard Cap:
+            capabilities.setCapability("build", "City Map Android");
 
             capabilities.setCapability("platformName", "ANDROID");
             capabilities.setCapability("platform", "android");
@@ -99,8 +101,6 @@ public class SetCapabilities {
             capabilities.setCapability("os_version", "9.0");
             capabilities.setCapability("device", "Samsung Galaxy S10");
             capabilities.setCapability("automationName", "Appium");    // uiautomator2 does not work on PayPal pages
-
-
 
             //Start the App for the corresponding Actor:
             //Berner - uses Berlin App

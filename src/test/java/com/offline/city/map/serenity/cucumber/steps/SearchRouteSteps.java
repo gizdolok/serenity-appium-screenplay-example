@@ -24,6 +24,8 @@ public class SearchRouteSteps {
 
         OnStage.setTheStage(new OnlineCast());
         this.scenario = scenario;
+        //we store the scenario name in a Serenity session var, in order to pass it to Browserstack, to show on its Dashboard
+        //we read back this session variable on the method SetCapabilities.forBrowserStack(DesiredCapabilities capabilities)
         Serenity.setSessionVariable("ScenarioName").to(scenario.getName());
     }
 
@@ -32,12 +34,11 @@ public class SearchRouteSteps {
         OnStage.drawTheCurtain();
     }
 
-    @Given("^that (.*) wants to search for a point of interest, using (.*)$")
-    public void navigatesToJourneyConfiguration(String commuterName, String deviceType) throws Throwable {
+    @Given("^that (.*) wants to search for a point of interest$")
+    public void navigatesToJourneyConfiguration(String commuterName) throws Throwable {
 
         Serenity.setSessionVariable("commuterName").to(commuterName);
 
-        Serenity.setSessionVariable("deviceType").to(deviceType);
         OnStage.theActorCalled(commuterName)
                                             .attemptsTo(
                                                             Launch.theApp(),

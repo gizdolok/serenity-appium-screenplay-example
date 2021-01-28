@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.Step;
 public class Launch implements Task {
 
     @Override
-    @Step("{0} launches thePrivacyPolicy Mobility App")
+    @Step("{0} launches the App")
     public <T extends Actor> void performAs(T actor) {
 
         //code just in case there is some pre-action needed, before starting thePrivacyPolicy test
@@ -17,6 +17,6 @@ public class Launch implements Task {
 
     public static Performable theApp() {
         return new Launch();
-                //instrumented(Launch.class); (toMap make it show on thePrivacyPolicy reports)
+                //instrumented(Launch.class); (to make it show on the reports)
     }
 }

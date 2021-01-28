@@ -9,27 +9,27 @@ Feature: Search Locations
   occupies a particular point
 
   Scenario Outline: Search for a POI
-    Given that <visitor> wants to search for a point of interest, using <device>
+    Given that <visitor> wants to search for a point of interest
       And he needs to know where <poi> is located
      Then he should be able to see <poi> on the map
 
     Examples: Points Of Interest in Berlin App
 
-      | visitor   | device  |  poi                 |
-      |  Berner   | android | Berliner Fernsehturm |
-      |  Berner   | android | Brandenburger Tor    |
+      | visitor   |      poi             |
+      |  Berner   | Berliner Fernsehturm |
+      |  Berner   | Brandenburger Tor    |
 
     Examples: Points Of Interest in London App
 
-      | visitor   | device  |  poi                 |
-      | Lodovico  | android | Covent Garden        |
-      | Lodovico  | android | Piccadilly Circus    |
+      | visitor   |      poi             |
+      | Lodovico  | Covent Garden        |
+      | Lodovico  | Piccadilly Circus    |
 
     Examples: Points Of Interest in Lisbon App
 
-      | visitor   | device  |  poi                 |
-      |  Lisbet   | android | Castelo de São Jorge |
-      |  Lisbet   | android | Bairro Alto          |
+      | visitor   |      poi             |
+      |  Lisbet   | Castelo de São Jorge |
+      |  Lisbet   | Bairro Alto          |
 
 
 
