@@ -14,6 +14,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import static com.offline.city.map.serenity.utils.AncillaryMethods.startTheAppForActor;
+
 
 public class SearchRouteSteps {
 
@@ -36,8 +38,8 @@ public class SearchRouteSteps {
 
     @Given("^that (.*) wants to search for a point of interest$")
     public void navigatesToJourneyConfiguration(String commuterName) throws Throwable {
-
-        Serenity.setSessionVariable("commuterName").to(commuterName);
+        //this method is important for our mechanism of the Actors-Apps association to work
+        startTheAppForActor(commuterName);
 
         OnStage.theActorCalled(commuterName)
                                             .attemptsTo(

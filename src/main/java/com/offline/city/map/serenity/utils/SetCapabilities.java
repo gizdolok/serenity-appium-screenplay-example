@@ -5,14 +5,13 @@ import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.offline.city.map.serenity.utils.Utils.isAndroidPlatform;
-import static com.offline.city.map.serenity.utils.Utils.isIosPlatform;
+import static com.offline.city.map.serenity.utils.AncillaryMethods.isAndroidPlatform;
+import static com.offline.city.map.serenity.utils.AncillaryMethods.isIosPlatform;
 
 public class SetCapabilities {
 
     static String actorName;
     static String scenarioName;
-    static String appName;
     static EnvironmentVariables environmentVariables;
     static Boolean forceAppToRestart;
 
@@ -85,7 +84,6 @@ public class SetCapabilities {
 
     public static void toStartDeviceForCurrentActor(DesiredCapabilities capabilities) {
         actorName = Serenity.sessionVariableCalled("commuterName");
-        appName = Serenity.sessionVariableCalled("appName");
         environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
 
         capabilities.setCapability("networkConnectionEnabled", "true");
@@ -173,7 +171,12 @@ public class SetCapabilities {
     }
 
     public static void localCapabilities(DesiredCapabilities capabilities) {
+
+/*
+        //we can use this code, if we need to run a set of tests, without re-installing the app for every test
+
         forceAppToRestart = Serenity.sessionVariableCalled("forceAppToRestart");
+
         if(forceAppToRestart != null && forceAppToRestart){
             //Uninstall and install App
             capabilities.setCapability("noReset", false);
@@ -182,20 +185,22 @@ public class SetCapabilities {
             //Normal Start
             capabilities.setCapability("noReset", true);
             capabilities.setCapability("fullReset", false);
-        }
+        }*/
+
         capabilities.setCapability("webStorageEnabled", true);
         capabilities.setCapability("autoDissmissAlerts", true);
+
+        //Read back Serenity session variable from the method Utils.startTheAppForActor(String commuterName)
         actorName = Serenity.sessionVariableCalled("commuterName");
-        appName = Serenity.sessionVariableCalled("appName");
         environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
 
         if(isAndroidPlatform()){
             capabilities.setCapability("platformName", "ANDROID");
 
-            capabilities.setCapability("platformVersion", "8.0");//10.0
-            capabilities.setCapability("deviceName", "FFY5T17C28022696");//Samsung Galaxy S10
+            capabilities.setCapability("platformVersion", "local.android.version");
+            capabilities.setCapability("deviceName", "local.android.device.name");
 
-            //capabilities.setCapability("automationName", "Appium");    // uiautomator2 does not work on PayPal pages
+            capabilities.setCapability("automationName", "appium");
             capabilities.setCapability("autoGrantPermissions", true);
             capabilities.setCapability("autoAcceptAlerts", true);
 
@@ -221,10 +226,10 @@ public class SetCapabilities {
         } else if(isIosPlatform()){
             capabilities.setCapability("platformName", "IOS");
 
-            capabilities.setCapability("udid", "your uidid");
-            capabilities.setCapability("platformVersion", "12.4.9");
-            capabilities.setCapability("deviceName", "Name of My iPhone Device");
-            capabilities.setCapability("xcodeOrgId", "your xcodeOrgId");
+            capabilities.setCapability("udid", "local.ios.udid");
+            capabilities.setCapability("platformVersion", "local.ios.version");
+            capabilities.setCapability("deviceName", "local.ios.device.name");
+            capabilities.setCapability("xcodeOrgId", "local.ios.xcodeOrg.id");
 
             capabilities.setCapability("connectHardwareKeyboard", true);
             capabilities.setCapability("realMobile", true);

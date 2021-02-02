@@ -1,6 +1,5 @@
-package com.offline.city.map.serenity.cucumber;
+package com.offline.city.map.serenity.cucumber.runners;
 
-import com.offline.city.map.serenity.BrowserStackSerenityTest;
 ;
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.core.webdriver.RemoteDriver;
@@ -20,7 +19,7 @@ import org.junit.runner.RunWith;
         //,dryRun = true
 
 )
-public class SearchingTests extends BrowserStackSerenityTest {
+public class SearchingTests {
 
     @Managed(driver = "appium")
     public RemoteDriver driver;

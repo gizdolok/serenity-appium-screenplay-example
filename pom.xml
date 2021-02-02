@@ -199,7 +199,7 @@
                         <include>**/*TestSuite.java</include>
                         <include>**/When*.java</include>-->
                         <!--default test suite when no profile -P parameter is specified-->
-                        <include>com/offline/city/map/serenity/cucumber/SearchingTests.java</include>
+                        <include>com/offline/city/map/serenity/cucumber/runners/SearchingTests.java</include>
                     </includes>
                     <reuseForks>true</reuseForks>
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
@@ -271,50 +271,6 @@
                             </includes>
                             <reuseForks>true</reuseForks>
                             <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>search-android-local</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven.failsafe-plugin.version}</version>
-                        <configuration>
-                            <includes>
-                                <include>com/offline/city/map/serenity/cucumber/SearchingTests.java</include>
-                            </includes>
-                            <reuseForks>true</reuseForks>
-                            <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                            <systemPropertyVariables>
-                                <environment>android-local</environment>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>search-ios-local</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven.failsafe-plugin.version}</version>
-                        <configuration>
-                            <includes>
-                                <include>com/offline/city/map/serenity/cucumber/SearchingTests.java</include>
-                            </includes>
-                            <reuseForks>true</reuseForks>
-                            <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                            <systemPropertyVariables>
-                                <environment>ios-local</environment>
-                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>

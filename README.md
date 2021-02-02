@@ -68,5 +68,4 @@ To execute specific profiles:
 
     mvn clean verify -P <profile_name>
 
-
 ## Execution Profiles
